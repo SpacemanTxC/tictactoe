@@ -5,7 +5,7 @@ import './index.css';
 
 // create components
 
-class Square extends React.Compnent {
+class Square extends React.Component {
 
   render() {
     return(
@@ -19,11 +19,11 @@ class Square extends React.Compnent {
   }
 }
 
-class Board extends React.Compnent {
+class Board extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      square: Array(9).fill(null),
+      squares: Array(9).fill(null),
     };
   }
 
@@ -42,7 +42,7 @@ class Board extends React.Compnent {
     );
   }
   render() {
-    const = 'Next player: X';
+    const status = 'Next player: X';
 
     return (
       <div>
@@ -67,10 +67,26 @@ class Board extends React.Compnent {
   }
 }
 
-class Game extends React.Compnent {
+class Game extends React.Component {
   render(){
     return (
-      
-    )
+      <div className="game">
+        <div className="game-board">
+          <Board />
+        </div>
+        <div className="game-info">
+          <div>{/* status */}</div>
+          <ol>{/* TODO */}</ol>
+        </div>
+      </div>
+
+    );
   }
 }
+
+// ******************************************************
+
+ReactDOM.render(
+  <Game />,
+  document.getElementById('root')
+);
