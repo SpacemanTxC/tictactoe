@@ -1,14 +1,18 @@
+// import to use react
 import React from 'react';
 import ReactDOM from 'react-dom';
+//import for css file
 import './index.css';
 
 
-// create components
+//Components for Game, Board, & Square
 
+//Class to create squares with X
 class Square extends React.Component {
-
+  // Display on Screen
   render() {
     return(
+        // Square Blocks Button
         <button
         className="square"
         onClick={() => this.props.onClick()}
@@ -18,21 +22,22 @@ class Square extends React.Component {
     );
   }
 }
-
+// Class Board
 class Board extends React.Component {
+  // Constructor to create the board as Array
   constructor(props){
     super(props);
     this.state = {
       squares: Array(9).fill(null),
     };
   }
-
+  //State of square changes to X on click
   handleClick(i) {
     const squares = this.state.squares.slice();
     squares[i] = 'X';
     this.setState({squares: squares});
   }
-
+  // Render each square
   renderSquare(i){
     return (
       <Square
@@ -41,6 +46,7 @@ class Board extends React.Component {
       />
     );
   }
+  // render the total squares
   render() {
     const status = 'Next player: X';
 
@@ -67,6 +73,7 @@ class Board extends React.Component {
   }
 }
 
+// Class for Game
 class Game extends React.Component {
   render(){
     return (
@@ -85,7 +92,7 @@ class Game extends React.Component {
 }
 
 // ******************************************************
-
+// Connect to html to display 
 ReactDOM.render(
   <Game />,
   document.getElementById('root')
