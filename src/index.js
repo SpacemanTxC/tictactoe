@@ -8,19 +8,13 @@ import './index.css';
 //Components for Game, Board, & Square
 
 //Class to create squares with X
-class Square extends React.Component {
-  // Display on Screen
-  render() {
-    return(
-        // Square Blocks Button
-        <button
-        className="square"
-        onClick={() => this.props.onClick()}
-        >
-        {this.props.value}
-        </button>
-    );
-  }
+//Replace class with function that will return props
+function Square(props){
+  return(
+    <button className="square" onClick={props.onClick}>
+    {props.value}
+    </button>
+  );
 }
 // Class Board
 class Board extends React.Component {
@@ -29,13 +23,16 @@ class Board extends React.Component {
     super(props);
     this.state = {
       squares: Array(9).fill(null),
+      xIsNext: true,
     };
   }
   //State of square changes to X on click
   handleClick(i) {
     const squares = this.state.squares.slice();
-    squares[i] = 'X';
-    this.setState({squares: squares});
+    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    this.setState({squares: squares,
+    xIsNext: !this.state.xIsNext,
+  });
   }
   // Render each square
   renderSquare(i){
@@ -48,7 +45,7 @@ class Board extends React.Component {
   }
   // render the total squares
   render() {
-    const status = 'Next player: X';
+    const status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
 
     return (
       <div>
@@ -92,7 +89,7 @@ class Game extends React.Component {
 }
 
 // ******************************************************
-// Connect to html to display 
+// Connect to html to display
 ReactDOM.render(
   <Game />,
   document.getElementById('root')
