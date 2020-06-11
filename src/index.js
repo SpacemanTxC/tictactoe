@@ -16,6 +16,29 @@ function Square(props){
     </button>
   );
 }
+//Declair a winner
+function calculateWinner(squares){
+  //Each comb of winner
+  const lines =[
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+  // for loop to feed props to new array
+  for (let i = 0; i < lines.length; i++){
+    const [a, b, c] = lines[i];
+    //if statement to check correct winner
+    if(squares[a] && squares[a] === squares[b] && squares[a] === squares[c]){
+      return squares[a];
+    }
+  }
+  return null;
+}
 // Class Board
 class Board extends React.Component {
   // Constructor to create the board as Array
@@ -45,7 +68,15 @@ class Board extends React.Component {
   }
   // render the total squares
   render() {
-    const status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+    // gives winner var
+    const winner = calculateWinner(this.state.squares);
+    let status;
+    //if statement to print winner or give next turn state
+    if (winner){
+      status = 'Winner: ' + winner;
+    } else {
+      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+    }
 
     return (
       <div>
