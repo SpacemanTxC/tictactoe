@@ -11,7 +11,7 @@ import './index.css';
 //Replace class with function that will return props
 function Square(props) {
   return ( <
-    button className = "square"
+  button className = "square"
     onClick = {
       props.onClick
     } > {
